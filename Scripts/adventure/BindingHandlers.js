@@ -84,8 +84,10 @@
 						textBinding($element.text());
 					});
 				}
+				$element.addClass('is-editable');
 			} else {
 				$element.off("input");
+				$element.removeClass('is-editable');
 			}
 		}
 	};

@@ -10,7 +10,7 @@ var Adventure;
 			canStepBack: true,
 			variables: {},
 			labelGroups: [],
-			pages: [{id: 0, pageText: '(Edit Me!)<br/>Create your very own "Choose your own adventure"! <ul><li>Click the "New Choice" button to add pages to your story.</li><li>Use the Adventure Map button at the top of the screen to quickly navigate your story.</li><li>The switch at the top right corner controls Edit Mode, click it when you want to give your adventure a test-play!</li></ul>', choices:[]}]
+			pages: [{id: 0, pageText: '(Edit Me!)<br/>Create your very own "Choose your own adventure"! ', choices:[]}]
 		};
 		
 		var tutorial = {

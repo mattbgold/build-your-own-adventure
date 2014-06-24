@@ -16,7 +16,7 @@ var Adventure;
 		
 		self.history = []; //a stack of our prior locations
 		
-		self.canEdit = ko.observable(true);
+		self.canEdit = ko.observable(false);
 		self.editAdvanced = ko.observable(false);
 		self.showPageTree = ko.observable(false); //use this to control visibility of pageTree
 

@@ -72,7 +72,7 @@
                 </ul>
 				<ul class="nav navbar-nav navbar-right">
 				<li><a href="javascript://" class="btn-nav"><button data-bind="fadeToggle: model.canEdit()" type="button" class="btn btn-default" data-toggle="modal" data-target="#advMap">Adventure Map</button></a></li>
-				<li><a href="javascript://"><input class="btn" id="chkEdit" type="checkbox" data-bind="bootstrapSwitchOn: canEdit"/></a></li>
+				<li><a id="lnkEdit" href="javascript://"><input class="btn" id="chkEdit" type="checkbox" data-bind="bootstrapSwitchOn: canEdit"/></a></li>
 				</ul>
             </div>
             <!--/.nav-collapse -->
@@ -271,6 +271,18 @@
 			$('#advMap').on('hidden.bs.modal', function() {
 				model.mapLinkToExistingPage(false);
 			});
+			
+			$('#lnkEdit').popover({
+				content: '<p class="text-primary">Click here to edit your adventure!</p>',
+				trigger: 'manual',
+				placement: 'bottom',
+				html: true
+			});
+			window.setTimeout(function() {
+				$('#lnkEdit').popover('show').click(function() {
+					$('#lnkEdit').popover('hide')
+				});
+			}, 3000);
         });
         
 		var model = new Adventure.EngineModel(Adventure.Stories.New);
