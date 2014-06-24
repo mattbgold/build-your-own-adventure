@@ -1,0 +1,20 @@
+Time Machine
+
+machine itself is the hub. 
+Make an important decision before reaching the machine.
+5 times to go to, each loops back to the hub. Multiple endings for each time, some lead to death. All choices made affect a master variable for "butterfly effect".
+
+After the quest in all 5 times is complete, you are given choice to go back to present (or ultra-secret choice to go back furhter into time and maybe join an ancient advanced civilization). The 5 choices for the present are actually 5 different endpoints, shown/hidden based on the butterfly effect variable (only one is visible). 
+
+Something happens back in the present, where the decision you made at the beginning is reflected in this alternate present. How could this be possible? MYSTERIOUS OOO
+
+
+Register (Dock, Log, Journal, Ledger, Variates, Record)
+
+We are ditching inventory. Journal elements map to normal variables. They provide visibility to
+-Sequence Id
+-Display Name
+-HoverText
+-Icon
+
+We could do little breadcrumb circles that trace the length of your journey. Click on them to travel back to that page
