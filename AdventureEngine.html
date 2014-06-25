@@ -71,7 +71,7 @@
 					
                 </ul>
 				<ul class="nav navbar-nav navbar-right">
-				<li><a href="javascript://" class="btn-nav"><button data-bind="fadeToggle: model.canEdit()" type="button" class="btn btn-default" data-toggle="modal" data-target="#advMap">Adventure Map</button></a></li>
+				<li><a href="javascript://" class="btn-nav"><button data-bind="fadeToggle: model.canEdit" type="button" class="btn btn-default" data-toggle="modal" data-target="#advMap">Adventure Map</button></a></li>
 				<li><a id="lnkEdit" href="javascript://"><input class="btn" id="chkEdit" type="checkbox" data-bind="bootstrapSwitchOn: canEdit"/></a></li>
 				</ul>
             </div>
@@ -83,7 +83,7 @@
 		
 		<div class="page is-hidden">
 			<div  style="text-align:right; height:0px; overflow: visible;">
-				<!--<span data-bind="fadeToggle: model.canEdit()"><label style="margin-right:6px;" for="chkEditAdvanced">Advanced Mode:</label><input id="chkEditAdvanced" class="icontext" type="checkbox" data-bind="checked: editAdvanced"/></span>-->
+				<!--<span data-bind="fadeToggle: model.canEdit"><label style="margin-right:6px;" for="chkEditAdvanced">Advanced Mode:</label><input id="chkEditAdvanced" class="icontext" type="checkbox" data-bind="checked: editAdvanced"/></span>-->
 			</div>
 			
             <div class=" row-fluid title">
@@ -91,7 +91,7 @@
                 <p class="lead" data-bind="html: story().titleSubtext, contentEditable: canEdit"></p>
             </div>
 			
-			<!--TODO: <span data-bind="fadeToggle: model.canEdit()"><span style="padding:0 10px; color:#999;" data-bind="contentEditable: canEdit, text: currentPage().name"></span></span>-->
+			<!--TODO: <span data-bind="fadeToggle: model.canEdit"><span style="padding:0 10px; color:#999;" data-bind="contentEditable: canEdit, text: currentPage().name"></span></span>-->
             <div class="well pagecontent">
 				<div class="pagetext" data-bind="fadepage: stagePage">
                     <div id="dvHeightMatch">
@@ -107,27 +107,26 @@
 					<!-- /ko -->
 						</ul>
 						
+						<!-- TODO: Below is a text input. New choice dropdown should have option for a text input, which shows up below regular choices on its own row. -->
                         <!--<div class="row"><div class="col-md-4"><input type="text" placeholder="Enter some text" /> <i class="fa fa-pencil fa-fw"></i></div></div>-->
                     
-					<div class="row pagecontrols">
-						<div class="col-md-12">
-						<a href="javascript://" class="pagecontrol btn btn-link btn-sm" data-bind="visible: model.story().canStepBack, click: $root.stepBack"><i class="fa fa-angle-double-left"></i> Go Back </a>
-						<div class="btn-group pagecontrol" >
-								<a id="lnkNewChoice" href="#" data-target="#" data-toggle="dropdown" class="pager-newchoice dropdown-toggle btn btn-primary btn-sm" data-bind="fadeToggle: model.canEdit()"><i class="fa fa-plus"></i><span class="icontext">New Choice</span></a>
-								<ul class="dropdown-menu" role="menu" aria-labelledby="lnkNewChoice">
-									<li class="dropdown-header">Links to</li>
-									<li><a data-bind="click: newChoice" class="choicetrigger" href="#"><i class="fa fa-code-fork fa-fw"></i>New Page</a></li>
-									<li data-bind="if: model.story().pages().length > 1"><a href="javascript://" data-bind="click: function(){model.mapLinkToExistingPage(true); model.currentPage().createNewChoice(1, 'Edit Me'); $('.choicetext:last').click();}"><i class="fa fa-sign-in fa-fw"></i>Existing Page</a></li>
-								</ul>
+						<div class="row pagecontrols">
+							<div class="col-md-12">
+								<a href="javascript://" class="pagecontrol btn btn-link btn-sm" data-bind="fadeToggle: model.canStepBack, retainWidth: true, click: $root.stepBack"><i class="fa fa-angle-double-left"></i> Go Back </a>
+								<div class="btn-group pagecontrol" >
+										<a id="lnkNewChoice" href="#" data-target="#" data-toggle="dropdown" class="pager-newchoice dropdown-toggle btn btn-primary btn-sm" data-bind="fadeToggle: model.canEdit"><i class="fa fa-plus"></i><span class="icontext">New Choice</span></a>
+										<ul class="dropdown-menu" role="menu" aria-labelledby="lnkNewChoice">
+											<li class="dropdown-header">Links to</li>
+											<li><a data-bind="click: newChoice" class="choicetrigger" href="#"><i class="fa fa-code-fork fa-fw"></i>New Page</a></li>
+											<li data-bind="if: model.story().pages().length > 1"><a href="javascript://" data-bind="click: function(){model.mapLinkToExistingPage(true); model.currentPage().createNewChoice(1, 'Edit Me'); $('.choicetext:last').click();}"><i class="fa fa-sign-in fa-fw"></i>Existing Page</a></li>
+										</ul>
+								</div>
+							</div>
 						</div>
-						</div>
-					</div>
 					</div>
 				</div>
             </div>
 			
-			
-
 			<div class="row">
             <!-- ko foreach: story().labelGroups -->
                 <div class="col-md-6">
@@ -272,6 +271,7 @@
 				model.mapLinkToExistingPage(false);
 			});
 			
+			//todo: add a tutorial custom binding that can do this for any element
 			$('#lnkEdit').popover({
 				content: '<p class="text-primary">Click here to edit your adventure!</p>',
 				trigger: 'manual',
@@ -279,9 +279,11 @@
 				html: true
 			});
 			window.setTimeout(function() {
-				$('#lnkEdit').popover('show').click(function() {
-					$('#lnkEdit').popover('hide')
-				});
+				if(!model.canEdit()) {
+					$('#lnkEdit').popover('show').click(function() {
+						$('#lnkEdit').popover('hide')
+					});
+				}
 			}, 3000);
         });
         

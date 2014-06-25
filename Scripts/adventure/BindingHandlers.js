@@ -49,13 +49,19 @@
 	};
 
 	ko.bindingHandlers.fadeToggle = {
-		update: function(element, valueAccessor) {
-			ko.utils.unwrapObservable(valueAccessor());
-			if(valueAccessor()) {
-				$(element).fadeIn();
+		update: function(element, valueAccessor, allBindings) {
+			var fixed = allBindings.get('retainWidth');
+			if(ko.utils.unwrapObservable(valueAccessor())) {
+				if (fixed) 
+					$(element).transition({opacity: 1});
+				else 
+					$(element).fadeIn();
 			}
 			else {
-				$(element).fadeOut();
+				if (fixed)
+					$(element).transition({opacity: 0});
+				else
+					$(element).fadeOut();
 			}
 		}
 	}
@@ -112,4 +118,5 @@
 			}
 		}
 	};
+
 })(jQuery);

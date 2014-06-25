@@ -14,7 +14,14 @@ var Adventure;
 		self.currentChoice = ko.observable();
 		self.stagePage = ko.observable(0);
 		
-		self.history = []; //a stack of our prior locations
+		//make observableArray
+		self.history = ko.observableArray([]); //a stack of our prior locations
+		self.canStepBack = ko.observable(false); 
+		
+		//set any observables that need to change when the page is hidden here. 
+		self.currentPage.subscribe(function() {
+			self.canStepBack(self.story().canStepBack() && self.history().length > 0);
+		});
 		
 		self.canEdit = ko.observable(false);
 		self.editAdvanced = ko.observable(false);
@@ -62,7 +69,7 @@ var Adventure;
             self.currentPage(self.story().getPage(id));
         };
 		self.stepBack = function() {
-			if (self.history.length>0) {
+			if (self.history().length>0) {
 				self.stagePage(self.history.pop());
 			}
 		};
