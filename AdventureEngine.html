@@ -160,10 +160,16 @@
 			<!-- ko ifnot: model.story().getPage(model.currentChoice().nextPage()) -->
 			<span class="alert alert-danger">Page Deleted</span>
 			<!-- /ko -->
+			
+		</div>
+		<div class="row">
 			<a href="javascript://" class="btn btn-link btn-sm" data-bind="click: function(){model.mapLinkToExistingPage(true);}">
 				<i class="fa fa-sign-in fa-fw"></i>
 				Link to a Different Page
 			</a>
+		</div>
+		<div class="row">
+			<a href="javascript://" class="btn btn-link btn-sm" onclick="confirmDelete(\'Are you sure you want to delete this choice? This cannot be undone.\', \'Delete Choice\', function(result){if(result){model.currentPage().deleteChoice(model.currentChoice().caption());}});"><i class="fa fa-trash-o fa-fw"></i><span class="icontext">Delete Choice</span></a>
 		</div>
 		<!-- ko if: model.editAdvanced -->
 		<input type="checkbox" data-bind="checked: model.currentChoice().isSecret" />  Secret</label>

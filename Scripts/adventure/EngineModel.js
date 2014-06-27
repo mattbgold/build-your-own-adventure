@@ -89,7 +89,7 @@ var Adventure;
 		}
 		
 		self.importStory = function() {
-			var story = prompt("Paste your story json here.", "");
+			var story = prompt("Paste your adventure json here.", "");
 			if(story) {
 				try {
 					self.loadStory(ko.utils.parseJson(story));

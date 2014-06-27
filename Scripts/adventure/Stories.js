@@ -4,13 +4,13 @@ var Adventure;
 
     (function (Stories) {
         var newStory = {
-			title: 'Title (Edit Me)',
-			titleSubtext: 'Subtitle (Edit Me)',
+			title: 'Your Title',
+			titleSubtext: 'Subtitle',
 			author: 'Author',
 			canStepBack: true,
 			variables: {},
 			labelGroups: [],
-			pages: [{id: 0, pageText: '(Edit Me!)<br/>Create your very own "Choose your own adventure"! ', choices:[]}]
+			pages: [{id: 0, pageText: 'Create your very own "Choose your own adventure"! <br/><br/>This is your first page, now <b>edit this page</b> and create a story!', choices:[]}]
 		};
 		
 		var tutorial = {
