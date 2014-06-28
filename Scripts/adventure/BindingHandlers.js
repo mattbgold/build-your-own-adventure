@@ -10,7 +10,7 @@
 				html: true, 
 				trigger: 'manual', 
 				placement: 'bottom', 
-				template: '<div class="popover popover-large"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>', 
+				template: '<div class="popover popover-choice"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>', 
 				title: 'Choice Options '	//<a href="javascript://" style="float:right;" onclick="confirmDelete(\'Are you sure you want to delete this choice? This cannot be undone.\', \'Delete Choice\', function(result){if(result){model.currentPage().deleteChoice(model.currentChoice().caption());}});"><i class="fa fa-trash-o fa-fw"></i><span class="icontext">Delete Choice</span></a>		
 			});
 
@@ -26,6 +26,7 @@
 					
 					if(popoverOn) {
 						ko.applyBindings(viewModel, po[0]);
+						$('.tt').tooltip();
 					}
 				}
 			});

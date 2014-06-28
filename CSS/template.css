@@ -68,9 +68,9 @@ color:#4582ec;
 .pager-newchoice {
 	margin-left:5px;
 }
-.popover-large {
-	width:420px;
-    max-width:420px;
+.popover-choice {
+	width:300px;
+    max-width:300px;
 }
 
 .pager li > a.is-editable:hover, .pager li > a.is-editable:focus {
