@@ -13,7 +13,9 @@ label {
 }
 
 /* ----------- Modules ----------- */
-
+.navbar-right.pull-right li {
+	display:inline-block;
+}
 .pagetext {
     height:0;
 }

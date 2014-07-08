@@ -8,7 +8,7 @@
     <meta name="author" content="Matthew Gold">
     <link rel="shortcut icon" href="Images/favicon.ico">
 
-    <title>Adventure Engine</title>
+    <title>Build Your Own Adventure</title>
 
     <!-- Bootstrap core CSS -->
     <link href="CSS/bootswatch/bootstrap.readable.min.css" rel="stylesheet" media="screen" title="main">
@@ -36,8 +36,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="AdventureEngine.html">Adventure Engine</a>
+                <a class="navbar-brand" href="AdventureEngine.html">Build Your Own Adventure</a>
             </div>
+            <ul class="nav navbar-nav navbar-right pull-right">
+				<li><a href="javascript://" class="btn-nav"><button data-bind="fadeToggle: model.canEdit" type="button" class="btn btn-default" data-toggle="modal" data-target="#advMap">Adventure Map</button></a></li>
+				<li><a id="lnkEdit" href="javascript://"><input class="btn" id="chkEdit" type="checkbox" data-bind="bootstrapSwitchOn: canEdit"/></a></li>
+		    </ul>
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li><a href="javascript:model.loadStory(Adventure.Stories.Tutorial);">Demo</a></li> <!-- li class="active" --> 
@@ -77,10 +81,7 @@
                     </li>
 					
                 </ul>
-				<ul class="nav navbar-nav navbar-right">
-				<li><a href="javascript://" class="btn-nav"><button data-bind="fadeToggle: model.canEdit" type="button" class="btn btn-default" data-toggle="modal" data-target="#advMap">Adventure Map</button></a></li>
-				<li><a id="lnkEdit" href="javascript://"><input class="btn" id="chkEdit" type="checkbox" data-bind="bootstrapSwitchOn: canEdit"/></a></li>
-				</ul>
+				
             </div>
             <!--/.nav-collapse -->
         </div>
