@@ -1,7 +1,21 @@
 /* ---------- Layout ---------- */
-body {
-  padding-top: 50px;
+
+@media (max-width: 767px) {
+	body {
+		padding-top:100px;
+	}
 }
+@media (min-width: 768px) and (max-width: 991px) {
+	body {
+		padding-top:75px;
+	}
+}
+@media (min-width: 992px) {
+	body {
+	  padding-top: 50px;
+	}
+}
+
 label {
     font-weight:normal;
 }
