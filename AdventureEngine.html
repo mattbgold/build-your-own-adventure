@@ -176,7 +176,8 @@
 			<a href="javascript://" class="btn btn-link btn-sm" onclick="confirmDelete('Are you sure you want to delete this choice? This cannot be undone.', 'Delete Choice', function(result){if(result){model.currentPage().deleteChoice(model.currentChoice().caption());}});"><i class="fa fa-trash-o fa-fw"></i> Delete Choice</a>
 		</div>
 		<!-- ko if: model.editAdvanced -->
-		<input type="checkbox" data-bind="checked: model.currentChoice().isSecret" />  Secret</label>
+		<fieldset><legend>Advanced</legend>
+		<label title="Secret choices are hidden if the requirements are not met." class="tt" data-toggle="tooltip" data-placement="right"><input type="checkbox" data-bind="checked: model.currentChoice().isSecret" />  Secret</label>
 		
         <div class="row">
 			<div class="col-sm-6">
@@ -198,6 +199,7 @@
 				</fieldset>
 			</div>
 		</div>
+		</fieldset>
 		<!-- /ko -->
     </div>
     
