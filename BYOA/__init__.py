@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request, make_response, current_app, render_template
-
+import requests
 import pycouchdb
 
 try:
@@ -21,6 +21,12 @@ app = Flask(__name__)
 def home():
     return render_template('AdventureEngine.html')
 
+@app.route("/adventure/load")
+@cross_origin(headers=['Content-Type'])
+def alldocs():
+    r = requests.get('http://localhost:5984/adventures/_all_docs')
+    return jsonify(r.json())
+	
 @app.route("/adventure/load/<id>", methods=['GET', 'POST', 'OPTIONS'])
 @cross_origin(headers=['Content-Type'])
 def loady(id):
