@@ -6,17 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Create your own adventure">
     <meta name="author" content="Matthew Gold">
-    <link rel="shortcut icon" href="Images/favicon.ico">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='Images/favicon.ico') }}">
 
     <title>Build Your Own Adventure</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="CSS/bootswatch/bootstrap.readable.min.css" rel="stylesheet" media="screen" title="main">
-	<link href="CSS/bootstrap-switch.min.css" rel="stylesheet">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='CSS/bootswatch/bootstrap.readable.min.css') }}" rel="stylesheet" media="screen" title="main">
+	<link href="{{ url_for('static', filename='CSS/bootstrap-switch.min.css') }}" rel="stylesheet">
+    <link href="////cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="CSS/template.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='CSS/template.css') }}" rel="stylesheet">
 	
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -54,10 +54,13 @@
 					<li class="dropdown">
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">File <span class="caret"></span></a>
 					    <ul class="dropdown-menu" aria-labelledby="download">
+					    	<li><a href="javascript:saveAdv();"><i class="fa fa-fw fa-save"></i>Save Adventure</a></li>
+					    	<li><a href="javascript:loadAdv('a9097cb0f1254a008651598e33f3b0a7');"><i class="fa fa-fw fa-cloud-download"></i>Load Adventure</a></li>
+							<li class="divider"></li>
 							<li><a href="javascript:model.loadStory(Adventure.Stories.New);"><i class="fa fa-fw fa-plus"></i>New Adventure</a></li>
 							<li class="divider"></li>
-							<li><a href="javascript:model.exportStory();">Export JSON</a></li>
-							<li><a href="javascript:model.importStory();">Import JSON</a></li>
+							<li><a href="javascript:model.exportStory();"><i class="fa fa-fw fa-file-code-o"></i>Export JSON</a></li>
+							<li><a href="javascript:model.importStory();"><i class="fa fa-fw fa-code"></i>Import JSON</a></li>
 						</ul>
                     </li>
                     <li class="dropdown">
@@ -84,17 +87,16 @@
                           <li><a href="#" class="change-style-menu-item" rel="CSS/bootswatch/bootstrap.superhero.min.css"><i class="icon-fixed-width icon-pencil"></i> Superhero</a></li>
                       </ul>
                     </li>
-					
                 </ul>
             </div>
             <!--/.nav-collapse -->
         </div>
     </div>
-
     <div class="story container">
-		
 		<div class="page is-hidden">
-			<div  style="text-align:right; height:0px; overflow: visible;">
+			<div  style="text-align:left; height:0px; overflow: visible;">
+			<span id="spnSave" class="text-success is-hidden"><i class="fa fa-fw fa-check"></i> Save successful!</span>
+			<span id="spnSaveConflict" class="text-danger is-hidden"><i class="fa fa-fw fa-exclamation"></i> There was a conflict. Please reload the adventure.</span>
 				<!--<span data-bind="fadeToggle: model.canEdit"><label style="margin-right:6px;" for="chkEditAdvanced">Advanced Mode:</label><input id="chkEditAdvanced" class="icontext" type="checkbox" data-bind="checked: editAdvanced"/></span>-->
 			</div>
 			
@@ -257,20 +259,20 @@
 
     <!-- Import Libraries and Models
     ================================================== -->
-    <script src="Scripts/jquery-2.1.0.min.js"></script>
-	<script src="Scripts/knockout-3.0.0.js"></script>
-	<script src="Scripts/knockout.mapping-latest.js"></script>
-    <script src="Scripts/bootstrap.min.js"></script>
-    <script src="Scripts/jquery.transit.min.js"></script>
-    <script src="Scripts/bootstrap-switch.min.js"></script>
-	<script src="Scripts/bootbox.min.js"></script>
+    <script src="{{ url_for('static', filename='Scripts/jquery-2.1.0.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='Scripts/knockout-3.0.0.js') }}"></script>
+	<script src="{{ url_for('static', filename='Scripts/knockout.mapping-latest.js') }}"></script>
+    <script src="{{ url_for('static', filename='Scripts/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='Scripts/jquery.transit.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='Scripts/bootstrap-switch.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='Scripts/bootbox.min.js') }}"></script>
 	
-	<script src="Scripts/adventure/Adventure.js"></script>
-	<script src="Scripts/adventure/EngineModel.js"></script>
-	<script src="Scripts/adventure/BindingHandlers.js"></script>
-	<script src="Scripts/adventure/Stories.js"></script>
-	<script src="Scripts/adventure/Utilities.js"></script>
-	<script src="Scripts/jquery.highlight.js"></script>
+	<script src="{{ url_for('static', filename='Scripts/adventure/Adventure.js') }}"></script>
+	<script src="{{ url_for('static', filename='Scripts/adventure/EngineModel.js') }}"></script>
+	<script src="{{ url_for('static', filename='Scripts/adventure/BindingHandlers.js') }}"></script>
+	<script src="{{ url_for('static', filename='Scripts/adventure/Stories.js') }}"></script>
+	<script src="{{ url_for('static', filename='Scripts/adventure/Utilities.js') }}"></script>
+	<script src="{{ url_for('static', filename='Scripts/jquery.highlight.js') }}"></script>
     <script type="text/javascript">
         $(function () {
 			$('.page').fadeIn();
@@ -306,6 +308,33 @@
 			}, 3000);
         });
         
+		// -- temporary for prototype use only --
+			function saveAdv() {
+				$.ajax({
+					url: '{{ url_for('save') }}',
+					type: 'POST',
+					dataType: 'json',
+					contentType: 'application/json',
+					data: ko.toJSON(ko.mapping.toJS(model.story))
+				}).done(function(response){
+					model.story()._rev = response._rev; //revision needs to be updated each time we save. 
+					$('#spnSave').fadeIn().delay(3500).fadeOut('slow');
+				}).fail(function(response){
+					$('#spnSaveConflict').fadeIn().delay(3500).fadeOut('slow');
+				});
+			}
+			function loadAdv(id) {
+				$.ajax({
+					url: '{{ url_for('loady', id='') }}'+id,
+					type: 'GET',
+					dataType: 'json'
+				}).done(function(response){
+					model.loadStory(response);
+				}).fail(function(response){
+					alert(response);
+				});
+			}
+		// --------------------------------------
 		var model = new Adventure.EngineModel(Adventure.Stories.New);
 		ko.applyBindings(model);
     </script>
