@@ -24,7 +24,7 @@ def home():
 @app.route("/adventure/load")
 @cross_origin(headers=['Content-Type'])
 def alldocs():
-    r = requests.get('http://localhost:5984/adventures/_all_docs')
+    r = requests.get('http://localhost:5984/adventures/_design/adventureids/_view/all')
     return jsonify(r.json())
 	
 @app.route("/adventure/load/<id>", methods=['GET', 'POST', 'OPTIONS'])
