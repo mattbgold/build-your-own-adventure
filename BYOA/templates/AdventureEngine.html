@@ -55,7 +55,7 @@
 						<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">File <span class="caret"></span></a>
 					    <ul class="dropdown-menu" aria-labelledby="download">
 					    	<li><a href="javascript:saveAdv();"><i class="fa fa-fw fa-save"></i>Save Adventure</a></li>
-					    	<li><a href="javascript:loadAdv('a9097cb0f1254a008651598e33f3b0a7');"><i class="fa fa-fw fa-cloud-download"></i>Load Adventure</a></li>
+					    	<li><a href="javascript:loadAdv();"><i class="fa fa-fw fa-cloud-download"></i>Load Adventure</a></li>
 							<li class="divider"></li>
 							<li><a href="javascript:model.loadStory(Adventure.Stories.New);"><i class="fa fa-fw fa-plus"></i>New Adventure</a></li>
 							<li class="divider"></li>
@@ -323,7 +323,30 @@
 					$('#spnSaveConflict').fadeIn().delay(3500).fadeOut('slow');
 				});
 			}
-			function loadAdv(id) {
+			function loadAdv() {
+				$.ajax({
+					url: '{{ url_for('alldocs') }}',
+					type: 'GET',
+					dataType: 'json'
+				}).done(function(response) {
+					var lst = $('<div></div>');
+					$.each(response.rows, function(i, row) {
+						lst.append($('<div style="margin-bottom: 10px;"><blockquote><button class="btn btn-primary" data-dismiss="modal" onclick="getAdv(\''+row.id+'\')">Load</button> &nbsp;'+row.value+'</blockquote></div>'));
+					});
+					bootbox.dialog({
+						message: lst.html(),
+						title: 'Load Adventure',
+						buttons: {
+							cancel: {
+							  label: "Cancel",
+							  className: "btn-default"
+							}
+						}
+					});
+				});
+			}
+			
+			function getAdv(id) {
 				$.ajax({
 					url: '{{ url_for('loady', id='') }}'+id,
 					type: 'GET',
