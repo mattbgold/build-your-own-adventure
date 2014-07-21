@@ -66,25 +66,29 @@
                     <li class="dropdown">
                       <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">Theme <span class="caret"></span></a>
                       <ul class="dropdown-menu" aria-labelledby="download">
-					      <li><a href="#" class="change-style-menu-item" rel="CSS/bootswatch/bootstrap.readable.min.css"><i class="icon-fixed-width icon-pencil"></i> Readable (Default)</a></li>
-                          <li><a href="#" class="change-style-menu-item" rel="CSS/bootstrap.min.css"><i class="icon-fixed-width icon-pencil"></i> Bootstrap (No Theme)</a></li>
-                          <li class="divider"></li>
-                          <li role="presentation" class="dropdown-header">Light Color Schemes</li>
-                          <!--<li><a href="#" class="change-style-menu-item" rel="CSS/bootswatch/bootstrap.amelia.min.css"><i class="icon-fixed-width icon-pencil"></i> Amelia</a></li>-->
-                          <li><a href="#" class="change-style-menu-item" rel="CSS/bootswatch/bootstrap.cerulean.min.css"><i class="icon-fixed-width icon-pencil"></i> Cerulean</a></li>
-                          <li><a href="#" class="change-style-menu-item" rel="CSS/bootswatch/bootstrap.cosmo.min.css"><i class="icon-fixed-width icon-pencil"></i> Cosmo</a></li>
-                          <!--<li><a href="#" class="change-style-menu-item" rel="CSS/bootswatch/bootstrap.flatly.min.css"><i class="icon-fixed-width icon-pencil"></i> Flatly</a></li>-->
-                          <li><a href="#" class="change-style-menu-item" rel="CSS/bootswatch/bootstrap.journal.min.css"><i class="icon-fixed-width icon-pencil"></i> Journal</a></li>
-                          <li><a href="#" class="change-style-menu-item" rel="CSS/bootswatch/bootstrap.lumen.min.css"><i class="icon-fixed-width icon-pencil"></i> Lumen</a></li>
-                          <li><a href="#" class="change-style-menu-item" rel="CSS/bootswatch/bootstrap.simplex.min.css"><i class="icon-fixed-width icon-pencil"></i> Simplex</a></li>
-                          <li><a href="#" class="change-style-menu-item" rel="CSS/bootswatch/bootstrap.spacelab.min.css"><i class="icon-fixed-width icon-pencil"></i> Spacelab</a></li>
-                          <li><a href="#" class="change-style-menu-item" rel="CSS/bootswatch/bootstrap.united.min.css"><i class="icon-fixed-width icon-pencil"></i> United</a></li>
-                          <li><a href="#" class="change-style-menu-item" rel="CSS/bootswatch/bootstrap.yeti.min.css"><i class="icon-fixed-width icon-pencil"></i> Yeti</a></li>
-                          <li class="divider"></li>
-                          <li role="presentation" class="dropdown-header">Dark Color Schemes</li>
-                          <li><a href="#" class="change-style-menu-item" rel="CSS/bootswatch/bootstrap.cyborg.min.css"><i class="icon-fixed-width icon-pencil"></i> Cyborg</a></li>
-                          <li><a href="#" class="change-style-menu-item" rel="CSS/bootswatch/bootstrap.slate.min.css"><i class="icon-fixed-width icon-pencil"></i> Slate</a></li>
-                          <li><a href="#" class="change-style-menu-item" rel="CSS/bootswatch/bootstrap.superhero.min.css"><i class="icon-fixed-width icon-pencil"></i> Superhero</a></li>
+                        <li><a href="#" class="change-style-menu-item" rel="{{ url_for('static', filename='CSS/bootswatch/bootstrap.readable.min.css') }}"><i class="icon-fixed-width icon-pencil"></i> Readable (Default)</a></li>
+                        <li><a href="#" class="change-style-menu-item" rel="{{ url_for('static', filename='CSS/bootstrap.min.css') }}"><i class="icon-fixed-width icon-pencil"></i> Bootstrap (No Theme)</a></li>
+
+                        <li class="divider"></li>
+                        <li role="presentation" class="dropdown-header">Light Color Schemes</li>
+                      
+                        <!--<li><a href="#" class="change-style-menu-item" rel="CSS/bootswatch/bootstrap.amelia.min.css"><i class="icon-fixed-width icon-pencil"></i> Amelia</a></li>-->
+                        <li><a href="#" class="change-style-menu-item" rel="{{ url_for('static', filename='CSS/bootswatch/bootstrap.cerulean.min.css') }}"><i class="icon-fixed-width icon-pencil"></i> Cerulean</a></li>
+                        <li><a href="#" class="change-style-menu-item" rel="{{ url_for('static', filename='CSS/bootswatch/bootstrap.cosmo.min.css') }}"><i class="icon-fixed-width icon-pencil"></i> Cosmo</a></li>
+                        <!--<li><a href="#" class="change-style-menu-item" rel="CSS/bootswatch/bootstrap.flatly.min.css"><i class="icon-fixed-width icon-pencil"></i> Flatly</a></li>-->
+                        <li><a href="#" class="change-style-menu-item" rel="{{ url_for('static', filename='CSS/bootswatch/bootstrap.journal.min.css') }}"><i class="icon-fixed-width icon-pencil"></i> Journal</a></li>
+                        <li><a href="#" class="change-style-menu-item" rel="{{ url_for('static', filename='CSS/bootswatch/bootstrap.lumen.min.css') }}"><i class="icon-fixed-width icon-pencil"></i> Lumen</a></li>
+                        <li><a href="#" class="change-style-menu-item" rel="{{ url_for('static', filename='CSS/bootswatch/bootstrap.simplex.min.css') }}"><i class="icon-fixed-width icon-pencil"></i> Simplex</a></li>
+                        <li><a href="#" class="change-style-menu-item" rel="{{ url_for('static', filename='CSS/bootswatch/bootstrap.spacelab.min.css') }}"><i class="icon-fixed-width icon-pencil"></i> Spacelab</a></li>
+                        <li><a href="#" class="change-style-menu-item" rel="{{ url_for('static', filename='CSS/bootswatch/bootstrap.united.min.css') }}"><i class="icon-fixed-width icon-pencil"></i> United</a></li>
+                        <li><a href="#" class="change-style-menu-item" rel="{{ url_for('static', filename='CSS/bootswatch/bootstrap.yeti.min.css') }}"><i class="icon-fixed-width icon-pencil"></i> Yeti</a></li>
+
+                        <li class="divider"></li>
+                        <li role="presentation" class="dropdown-header">Dark Color Schemes</li>
+
+                        <li><a href="#" class="change-style-menu-item" rel="{{ url_for('static', filename='CSS/bootswatch/bootstrap.cyborg.min.css') }}"><i class="icon-fixed-width icon-pencil"></i> Cyborg</a></li>
+                        <li><a href="#" class="change-style-menu-item" rel="{{ url_for('static', filename='CSS/bootswatch/bootstrap.slate.min.css') }}"><i class="icon-fixed-width icon-pencil"></i> Slate</a></li>
+                        <li><a href="#" class="change-style-menu-item" rel="{{ url_for('static', filename='CSS/bootswatch/bootstrap.superhero.min.css') }}"><i class="icon-fixed-width icon-pencil"></i> Superhero</a></li>
                       </ul>
                     </li>
                 </ul>
