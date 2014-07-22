@@ -45,6 +45,7 @@ def save():
     raw_json['last_edited'] = pretty_time
     raw_json['last_edited_epoch'] = epoch_time
 
+    print request.get_json()
 
     response = make_response(jsonify(couch.save(raw_json)))
     return response
