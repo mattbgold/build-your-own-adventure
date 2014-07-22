@@ -226,6 +226,9 @@
 							<div class="row mapelement">
 								<div class="col-sm-2">
 									<a class="btn btn-link btn-sm" href="javascript://" data-bind="click: function() {$('#advMap').modal('hide'); model.stagePage($data.id()); model.history.push(model.currentPage().id());}"><i class="fa fa-angle-right"></i> <span data-bind="text: '  ' + $data.name()"></span></a>
+                  <!-- ko if: $data.choices().length != 0 -->
+                  <a class="btn btn-link btn-sm" href="javascript://" data-bind="toggleClick: model.filteredPageChoices"><i class="fa fa-angle-right"></i> <span>Show Choices</span></a>
+                  <!-- /ko -->
 								</div>
 								<div class="col-sm-8 mapelement-pagetext">
 									<p class="icontext" style="display:inline;" data-bind="html: $data.pageText()"></p>
@@ -235,6 +238,13 @@
 									<a class="btn btn-link btn-sm" href="#" data-bind="visible: model.story().pages().length > 1,click: function(){confirmDelete('Are you sure you want to delete this page? This cannot be undone.', 'Delete Page', function(){$root.story().deletePage($data.id);});}"><i class="fa fa-trash-o">&nbsp;&nbsp;Delete page</i></a>
 								</div>
 							</div>
+              <!-- ko if: $data.choices().length != 0 -->
+              <div class="row mapchoices" data-bind="slideToggle: model.filteredPageChoices">
+                <ul class="list-inline" data-bind="foreach: { data: $data.choices(), as: 'choice' }">
+                  <li><a href="javascript://" data-bind="click: function() { $('#advMap').modal('hide'); model.stagePage($parent.id()); model.history.push(model.currentPage().id()); }"><span data-bind="text: choice.caption"></span></a></li>
+                </ul>
+              </div>
+							<!-- /ko -->
 							<!-- /ko -->
 							<!-- ko if: model.mapLinkToExistingPage -->
 							<!-- ko if: $data.id() !== model.currentPage().id() -->
