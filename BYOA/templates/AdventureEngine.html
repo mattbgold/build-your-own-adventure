@@ -227,7 +227,7 @@
 								<div class="col-sm-2">
 									<a class="btn btn-link btn-sm" href="javascript://" data-bind="click: function() {$('#advMap').modal('hide'); model.stagePage($data.id()); model.history.push(model.currentPage().id());}"><i class="fa fa-angle-right"></i> <span data-bind="text: '  ' + $data.name()"></span></a>
                   <!-- ko if: $data.choices().length != 0 -->
-                  <a class="btn btn-link btn-sm" href="javascript://" data-bind="toggleClick: model.filteredPageChoices"><i class="fa fa-angle-right"></i> <span>Show Choices</span></a>
+                  <a class="btn btn-link btn-sm" href="javascript://" data-bind="click: function() { $('.choices-'+$data.id()).slideToggle('fast'); }"><i class="fa fa-angle-right"></i> <span data-bind="">Toggle Choices</span></a>
                   <!-- /ko -->
 								</div>
 								<div class="col-sm-8 mapelement-pagetext">
@@ -239,9 +239,9 @@
 								</div>
 							</div>
               <!-- ko if: $data.choices().length != 0 -->
-              <div class="row mapchoices" data-bind="slideToggle: model.filteredPageChoices">
+              <div class="row mapchoices" style="display:none" data-bind="css: 'choices-' + $data.id()">
                 <ul class="list-inline" data-bind="foreach: { data: $data.choices(), as: 'choice' }">
-                  <li><a href="javascript://" data-bind="click: function() { $('#advMap').modal('hide'); model.stagePage($parent.id()); model.history.push(model.currentPage().id()); }"><span data-bind="text: choice.caption"></span></a></li>
+                  <li><a href="javascript://" data-bind="click: function() { $('#advMap').modal('hide'); model.stagePage(choice.nextPage()); model.history.push($parent.id()); }"><span data-bind="text: choice.caption"></span></a></li>
                 </ul>
               </div>
 							<!-- /ko -->

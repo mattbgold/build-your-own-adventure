@@ -38,7 +38,6 @@ var Adventure;
 		});
 		
 		self.pageFilter = ko.observable('');
-		self.filteredPageChoices = ko.observable(false);
 		self.filteredPages = ko.computed(function() {
 			if(self.pageFilter().trim() === '') {
 				$('.mapelement-pagetext p').css('margin-left', 0)
