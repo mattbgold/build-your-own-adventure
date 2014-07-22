@@ -34,7 +34,7 @@ def loady(id):
     response = make_response(jsonify(couch.get(id)))
     return response
 
-@app.route("/adventure/save<id>", methods=['POST', 'OPTIONS'])
+@app.route("/adventure/save", methods=['POST', 'OPTIONS'])
 @cross_origin(headers=['Content-Type'])
 def save():  
     raw_json = request.get_json()
