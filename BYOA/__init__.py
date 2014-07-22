@@ -34,16 +34,18 @@ def loady(id):
     response = make_response(jsonify(couch.get(id)))
     return response
 
-@app.route("/adventure/save", methods=['POST', 'OPTIONS'])
+@app.route("/adventure/save<id>", methods=['POST', 'OPTIONS'])
 @cross_origin(headers=['Content-Type'])
 def save():  
-    #request.get_json works
-    # add the curren time and store the story
+    raw_json = request.get_json()
+
+    # add the current time 
     pretty_time = time.strftime("%m/%d/%y at %I:%M")
     epoch_time = int(time.time())
-    raw_json = request.get_json()
     raw_json['last_edited'] = pretty_time
     raw_json['last_edited_epoch'] = epoch_time
+
+
     response = make_response(jsonify(couch.save(raw_json)))
     return response
 
