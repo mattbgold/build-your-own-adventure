@@ -321,6 +321,7 @@
 					contentType: 'application/json',
 					data: ko.toJSON(ko.mapping.toJS(model.story))
 				}).done(function(response){
+					model.story()._id = response._id;
 					model.story()._rev = response._rev; //revision needs to be updated each time we save. 
 					$('#spnSave').fadeIn().delay(3500).fadeOut('slow');
 				}).fail(function(response){
