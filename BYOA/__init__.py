@@ -40,12 +40,12 @@ def save():
     raw_json = request.get_json()
 
     # add the current time 
-    pretty_time = time.strftime("%m/%d/%y at %I:%M")
+    the_date = time.strftime("%m/%d/%y")
+    the_time = time.strftime("%I:%M%P").lstrip('0')
+    pretty_time = the_date + " at " + the_time
     epoch_time = int(time.time())
     raw_json['last_edited'] = pretty_time
     raw_json['last_edited_epoch'] = epoch_time
-
-    print request.get_json()
 
     response = make_response(jsonify(couch.save(raw_json)))
     return response

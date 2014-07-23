@@ -101,6 +101,7 @@
 			<div  style="text-align:left; height:0px; overflow: visible;">
 			<span id="spnSave" class="text-success is-hidden"><i class="fa fa-fw fa-check"></i> Save successful!</span>
 			<span id="spnSaveConflict" class="text-danger is-hidden"><i class="fa fa-fw fa-exclamation"></i> There was a conflict. Please reload the adventure.</span>
+      <span id="spnLoad" class="text-success is-hidden"><i class="fa fa-fw fa-check"></i><span></span></span>
 				<!--<span data-bind="fadeToggle: model.canEdit"><label style="margin-right:6px;" for="chkEditAdvanced">Advanced Mode:</label><input id="chkEditAdvanced" class="icontext" type="checkbox" data-bind="checked: editAdvanced"/></span>-->
 			</div>
 			
@@ -332,6 +333,7 @@
 					data: ko.toJSON(ko.mapping.toJS(model.story))
 				}).done(function(response){
 					model.story()._rev = response._rev; //revision needs to be updated each time we save. 
+					model.story()._id = response._id; // updated the _id in case its the first save
 					$('#spnSave').fadeIn().delay(3500).fadeOut('slow');
 				}).fail(function(response){
 					$('#spnSaveConflict').fadeIn().delay(3500).fadeOut('slow');
@@ -367,6 +369,9 @@
 					dataType: 'json'
 				}).done(function(response){
 					model.loadStory(response);
+					$('#spnLoad span').html('Last Edited: ' + response.last_edited);
+					$('#spnLoad').fadeIn().delay(3500).fadeOut('slow');
+
 				}).fail(function(response){
 					alert(response);
 				});
