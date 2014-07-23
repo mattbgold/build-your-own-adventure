@@ -9,8 +9,8 @@ var Adventure;
 		//------------- Observables ------------------------------------------------------------
 		//------------------------------------------------------------------------------------
 		
-        self.story = ko.observable(new Adventure.Story(story)); // holds a Story
-        self.currentPage = ko.observable(new Adventure.Page(story.pages[0])); //holds Page
+    self.story = ko.observable(new Adventure.Story(story)); // holds a Story
+    self.currentPage = ko.observable(new Adventure.Page(story.pages[0])); //holds Page
 		self.currentChoice = ko.observable();
 		self.stagePage = ko.observable(0);
 		
@@ -65,20 +65,23 @@ var Adventure;
 		//------------- Functions ------------------------------------------------------------
 		//------------------------------------------------------------------------------------
 		
-        self.setPage = function (id) {
-            self.currentPage(self.story().getPage(id));
-        };
+    self.setPage = function (id) {
+        self.currentPage(self.story().getPage(id));
+    };
+
 		self.stepBack = function() {
 			if (self.history().length>0) {
 				self.stagePage(self.history.pop());
 			}
 		};
-        self.story.subscribe(function (newStory) {
-            self.currentPage(newStory.pages()[0]);
-        });
+
+    self.story.subscribe(function (newStory) {
+        self.currentPage(newStory.pages()[0]);
+    });
 		
 		self.loadStory = function(story) {
 			$('.story').transition({ opacity: 0 }, function () {
+			  self.history([]);
 				self.story(new Adventure.Story(story));
 				$('.story').transition({ opacity: 1 });
 			});
