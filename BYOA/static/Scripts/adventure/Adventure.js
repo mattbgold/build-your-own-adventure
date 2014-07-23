@@ -11,10 +11,10 @@ var Adventure;
         self.author = ko.observable(story.author);
         self.canStepBack = ko.observable(story.canStepBack);
 
-        self._id = story._id || undefined
-        self._rev = story._rev || undefined
+        self._id = story._id || undefined;
+        self._rev = story._rev || undefined;
 
-        self.last_edited = story.last_edited || undefined
+        self.last_edited = story.last_edited || undefined;
 		
         self.labelGroups = ko.observableArray([]);
         self.pages = ko.observableArray([]);
