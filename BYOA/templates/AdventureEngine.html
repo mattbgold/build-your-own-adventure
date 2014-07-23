@@ -101,6 +101,7 @@
 			<div  style="text-align:left; height:0px; overflow: visible;">
 			<span id="spnSave" class="text-success is-hidden"><i class="fa fa-fw fa-check"></i> Save successful!</span>
 			<span id="spnSaveConflict" class="text-danger is-hidden"><i class="fa fa-fw fa-exclamation"></i> There was a conflict. Please reload the adventure.</span>
+      <span id="spnLoad" class="text-success is-hidden"><i class="fa fa-fw fa-check"></i><span></span></span>
 				<!--<span data-bind="fadeToggle: model.canEdit"><label style="margin-right:6px;" for="chkEditAdvanced">Advanced Mode:</label><input id="chkEditAdvanced" class="icontext" type="checkbox" data-bind="checked: editAdvanced"/></span>-->
 			</div>
 			
@@ -226,6 +227,9 @@
 							<div class="row mapelement">
 								<div class="col-sm-2">
 									<a class="btn btn-link btn-sm" href="javascript://" data-bind="click: function() {$('#advMap').modal('hide'); model.stagePage($data.id()); model.history.push(model.currentPage().id());}"><i class="fa fa-angle-right"></i> <span data-bind="text: '  ' + $data.name()"></span></a>
+                  <!-- ko if: $data.choices().length != 0 -->
+                  <a class="btn btn-link btn-sm" href="javascript://" data-bind="click: function() { $('.choices-'+$data.id()).slideToggle('fast'); }"><i class="fa fa-angle-right"></i> <span data-bind="">Toggle Choices</span></a>
+                  <!-- /ko -->
 								</div>
 								<div class="col-sm-8 mapelement-pagetext">
 									<p class="icontext" style="display:inline;" data-bind="html: $data.pageText()"></p>
@@ -235,6 +239,13 @@
 									<a class="btn btn-link btn-sm" href="#" data-bind="visible: model.story().pages().length > 1,click: function(){confirmDelete('Are you sure you want to delete this page? This cannot be undone.', 'Delete Page', function(){$root.story().deletePage($data.id);});}"><i class="fa fa-trash-o">&nbsp;&nbsp;Delete page</i></a>
 								</div>
 							</div>
+              <!-- ko if: $data.choices().length != 0 -->
+              <div class="row mapchoices" style="display:none" data-bind="css: 'choices-' + $data.id()">
+                <ul class="list-inline" data-bind="foreach: { data: $data.choices(), as: 'choice' }">
+                  <li><a href="javascript://" data-bind="click: function() { $('#advMap').modal('hide'); model.stagePage(choice.nextPage()); model.history.push($parent.id()); }"><span data-bind="text: choice.caption"></span></a></li>
+                </ul>
+              </div>
+							<!-- /ko -->
 							<!-- /ko -->
 							<!-- ko if: model.mapLinkToExistingPage -->
 							<!-- ko if: $data.id() !== model.currentPage().id() -->
@@ -322,6 +333,7 @@
 					data: ko.toJSON(ko.mapping.toJS(model.story))
 				}).done(function(response){
 					model.story()._rev = response._rev; //revision needs to be updated each time we save. 
+					model.story()._id = response._id; // updated the _id in case its the first save
 					$('#spnSave').fadeIn().delay(3500).fadeOut('slow');
 				}).fail(function(response){
 					$('#spnSaveConflict').fadeIn().delay(3500).fadeOut('slow');
@@ -357,6 +369,9 @@
 					dataType: 'json'
 				}).done(function(response){
 					model.loadStory(response);
+					$('#spnLoad span').html('Last Edited: ' + response.last_edited);
+					$('#spnLoad').fadeIn().delay(3500).fadeOut('slow');
+
 				}).fail(function(response){
 					alert(response);
 				});
