@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request, make_response, current_app, render_template
+import time
 import requests
 import pycouchdb
 
@@ -36,10 +37,18 @@ def loady(id):
 @app.route("/adventure/save", methods=['POST', 'OPTIONS'])
 @cross_origin(headers=['Content-Type'])
 def save():  
-    #request.get_json works
-    response = make_response(jsonify(couch.save(request.get_json())))
+    raw_json = request.get_json()
+
+    # add the current time 
+    the_date = time.strftime("%m/%d/%y")
+    the_time = time.strftime("%I:%M%P").lstrip('0')
+    pretty_time = the_date + " at " + the_time
+    epoch_time = int(time.time())
+    raw_json['last_edited'] = pretty_time
+    raw_json['last_edited_epoch'] = epoch_time
+
+    response = make_response(jsonify(couch.save(raw_json)))
     return response
-    
 
 
 if __name__ == "__main__":
