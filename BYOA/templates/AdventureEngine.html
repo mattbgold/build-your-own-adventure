@@ -98,10 +98,10 @@
     </div>
     <div class="story container">
 		<div class="page is-hidden">
-			<div  style="text-align:left; height:0px; overflow: visible;">
-			<span id="spnSave" class="text-success is-hidden"><i class="fa fa-fw fa-check"></i> Save successful!</span>
-			<span id="spnSaveConflict" class="text-danger is-hidden"><i class="fa fa-fw fa-exclamation"></i> There was a conflict. Please reload the adventure.</span>
-      <span id="spnLoad" class="text-success is-hidden"><i class="fa fa-fw fa-check"></i><span></span></span>
+			<div class="contextmessage">
+                <span id="spnSave" class="text-success is-hidden"><i class="fa fa-fw fa-check"></i> Save successful!</span>
+                <span id="spnSaveConflict" class="text-danger is-hidden"><i class="fa fa-fw fa-exclamation"></i> There was a conflict. Please reload the adventure.</span>
+                <span id="spnLoad" class="text-success is-hidden"><i class="fa fa-fw fa-check"></i><span></span></span>
 				<!--<span data-bind="fadeToggle: model.canEdit"><label style="margin-right:6px;" for="chkEditAdvanced">Advanced Mode:</label><input id="chkEditAdvanced" class="icontext" type="checkbox" data-bind="checked: editAdvanced"/></span>-->
 			</div>
 			
@@ -110,7 +110,7 @@
                 <p class="lead" data-bind="html: story().titleSubtext, contentEditable: canEdit"></p>
             </div>
 			
-			<!--TODO: <span data-bind="fadeToggle: model.canEdit"><span style="padding:0 10px; color:#999;" data-bind="contentEditable: canEdit, text: currentPage().name"></span></span>-->
+			<!--TODO: Edit page name <span data-bind="fadeToggle: model.canEdit"><span style="padding:0 10px; color:#999;" data-bind="contentEditable: canEdit, text: currentPage().name"></span></span>-->
             <div class="well pagecontent">
 				<div class="pagetext" data-bind="fadepage: stagePage">
                     <div id="dvHeightMatch">
@@ -332,7 +332,6 @@
 					contentType: 'application/json',
 					data: ko.toJSON(ko.mapping.toJS(model.story))
 				}).done(function(response){
-					model.story()._id = response._id;
 					model.story()._rev = response._rev; //revision needs to be updated each time we save. 
 					model.story()._id = response._id; // updated the _id in case its the first save
 					$('#spnSave').fadeIn().delay(3500).fadeOut('slow');

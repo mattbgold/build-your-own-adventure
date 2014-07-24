@@ -30,6 +30,11 @@ label {
 .navbar-right.pull-right li {
 	display:inline-block;
 }
+.contextmessage {
+    text-align:left;
+	height:0px; 
+	overflow: visible;
+}
 .pagetext {
     height:0;
 }
