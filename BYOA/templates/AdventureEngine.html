@@ -226,7 +226,7 @@
 							<!-- ko ifnot: model.mapLinkToExistingPage -->
 							<div class="row mapelement">
 								<div class="col-sm-2">
-									<a class="btn btn-link btn-sm" href="javascript://" data-bind="click: function() {$('#advMap').modal('hide'); model.stagePage($data.id()); model.history.push(model.currentPage().id());}"><i class="fa fa-angle-right"></i> <span data-bind="text: '  ' + $data.name()"></span></a>
+									<a class="btn btn-link btn-sm" href="javascript://" data-bind="click: function() {$('#advMap').modal('hide'); model.stagePage($data.id()); model.history.push(model.currentPage().id());}"><i class="fa fa-angle-right"></i>&nbsp;&nbsp;<span data-bind="text: $data.name().substring(0,16), attr: {title: $data.name()}"></span></a>
                   <!-- ko if: $data.choices().length != 0 -->
                   <a class="btn btn-link btn-sm" href="javascript://" data-bind="click: function() { $('.choices-'+$data.id()).slideToggle('fast'); }"><i class="fa fa-angle-right"></i> <span data-bind="">Toggle Choices</span></a>
                   <!-- /ko -->
