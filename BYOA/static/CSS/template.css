@@ -195,7 +195,7 @@ background-color: #f5f5f5;
 .is-editable {
 }
 .is-editable:hover:not(:focus) {
-background-color: #d9edf7; /*bg-info*/
+background-color: rgba(129, 195, 255, 0.2); /*bg-info*/
 }
 .is-a-disabled {
 	color: Gray;
