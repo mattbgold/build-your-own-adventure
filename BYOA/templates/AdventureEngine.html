@@ -185,7 +185,7 @@
 			<div class="col-sm-12"><input type="checkbox" data-bind="checked: model.currentChoice().input" /> Text Input</div>
 		</div>
 		<div class="row" data-bind="fadeToggle: model.currentChoice().input, retainWidth: true">
-			<div class="col-sm-12">Aliases: <input class="tt" title="You may supply a comma separated list of alternate values here. This choice will be triggered if the user types any of these into the text input, in addition to the main choice caption." data-toggle="tooltip" data-placement="right" placeholder="value1, value2, value3, etc..." type="text" data-bind="value: model.currentChoice().inputAliases" /></div>
+			<div class="col-sm-12">Aliases: <input placeholder="value1, value2, value3, etc..." type="text" data-bind="value: model.currentChoice().inputAliases" /></div>
 		</div>
 		<div class="row">
 			<a href="javascript://" class="btn btn-link btn-sm" data-bind="click: function(){model.mapLinkToExistingPage(true);}">
