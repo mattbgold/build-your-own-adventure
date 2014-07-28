@@ -117,18 +117,19 @@
                         <p class="editable-block" data-bind="contentEditable: canEdit, html: currentPage().pageText"></p>
                         <ul class="pager choices">
 					<!-- ko foreach: currentPage().choices -->
+					<!-- ko if: $root.canEdit() || $data.input()===false -->
                             <li data-bind="css: {disabled: !$root.meetsRequirements($data.requirements())}">
 								<a href="javascript://" class="choice" data-bind="click: $root.choose, popover: '#popoverContent', visible: $root.meetsRequirements($data.requirements()) || isSecret()===false || $root.canEdit, css: {'pager-reqmet-secret': isSecret(), 'pager-reqmet': $data.requirements().length && $root.meetsRequirements($data.requirements()), 'is-editable': $root.canEdit() }">
-									<i class="fa fa-angle-right"></i>
+									<i class="fa" data-bind="css: {'fa-angle-right': input()===false, 'fa-pencil': input()===true}"></i>
 									<span class="icontext editable-inline choicetext" onclick="if (model.canEdit()){selectElementContents(this);}" data-bind="html: caption, contentEditable: $root.canEdit"></span>
 								</a>
 							</li>
 					<!-- /ko -->
+					<!-- /ko -->
 						</ul>
 						
-						<!-- TODO: Below is a text input. New choice dropdown should have option for a text input, which shows up below regular choices on its own row. -->
-                        <!--<div class="row"><div class="col-md-4"><input type="text" placeholder="Enter some text" /> <i class="fa fa-pencil fa-fw"></i></div></div>-->
-                    
+						<div class="row" style="margin-bottom:20px;" data-bind="if: currentPage().hasTextInput"><div class="col-md-4"><input type="text" placeholder="Enter some text" size="26"/> <i class="fa fa-pencil fa-fw"></i></div></div>
+						
 						<div class="row pagecontrols">
 							<div class="col-md-12">
 								<a href="javascript://" class="pagecontrol btn btn-link btn-sm" data-bind="fadeToggle: model.canStepBack, retainWidth: true, click: $root.stepBack"><i class="fa fa-angle-double-left"></i> Go Back </a>
@@ -173,6 +174,9 @@
 			<span class="alert alert-danger">Page Deleted</span>
 			<!-- /ko -->
 			
+		</div>
+		<div class="row">
+			<div class="col-sm-12"><input type="checkbox" data-bind="checked: model.currentChoice().input" /> Text Input</div>
 		</div>
 		<div class="row">
 			<a href="javascript://" class="btn btn-link btn-sm" data-bind="click: function(){model.mapLinkToExistingPage(true);}">
