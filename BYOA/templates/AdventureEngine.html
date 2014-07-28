@@ -128,7 +128,13 @@
 					<!-- /ko -->
 						</ul>
 						
-						<div class="row" style="margin-bottom:20px;" data-bind="if: currentPage().hasTextInput"><div class="col-md-4"><input type="text" placeholder="Enter some text" style="width:64%;"/> <i class="fa fa-pencil fa-fw"></i></div></div>
+						<div class="row" style="margin-bottom:20px;" data-bind="visible: currentPage().hasTextInput() && !canEdit()">
+							<div class="col-md-12"><i class="fa fa-pencil fa-fw"></i>
+								<input type="text" placeholder="Enter text" data-bind="value: userInput, valueUpdate: 'afterkeydown', enterPress: choosePageMatchingInput" style="width:190px;"/> 
+								<button class="btn btn-default btn-sm" data-bind="fadeToggle: userInput, click: choosePageMatchingInput">Submit</button>
+								<span class="text-danger choice-invalid is-hidden">Invalid choice</span>
+							</div>
+						</div>
 						
 						<div class="row pagecontrols">
 							<div class="col-md-12">

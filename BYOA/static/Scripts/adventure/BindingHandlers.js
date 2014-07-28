@@ -129,5 +129,14 @@
 			}
 		}
 	};
-
+	
+	ko.bindingHandlers.enterPress = {
+		init: function(element, valueAccessor, allBindings) {
+			$(element).keypress(function(e) {
+				if(e.which == 13) {
+					valueAccessor()();
+				}
+			});
+		}
+	};
 })(jQuery);
