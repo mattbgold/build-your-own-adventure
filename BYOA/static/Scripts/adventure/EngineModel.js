@@ -183,7 +183,13 @@ var Adventure;
     
 	self.choosePageMatchingInput = function() {
 		var matchingChoice = $.grep(self.currentPage().choices(), function(choice) {
-			return choice.input() && choice.caption().trim().toLowerCase() === self.userInput().trim().toLowerCase();
+			var trimput = self.userInput().trim().toLowerCase();
+			var optionArray = choice.inputAliases().split(',');
+			optionArray.push(choice.caption());
+			$.each(optionArray, function(i, val) {
+				optionArray[i] = val.trim().toLowerCase();
+			});
+			return choice.input() && $.inArray(trimput, optionArray) >= 0;
 		});
 		if(matchingChoice.length == 1) {
 			self.choose(matchingChoice[0]);
