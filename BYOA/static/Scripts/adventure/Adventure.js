@@ -55,6 +55,12 @@ var Adventure;
 		self.pageText = ko.observable(page.pageText);
         self.choices = ko.observableArray([]);
         
+        self.hasTextInput = ko.computed(function() {
+    		return $.grep(self.choices(), function(choice) {
+				return choice.input();
+    		}).length > 0; 
+    	});
+    	
         if (page.choices && page.choices.length > 0) {
             $.each(page.choices, function (i, choice) {
                 self.choices.push(new Adventure.Choice(choice));
