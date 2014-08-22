@@ -203,3 +203,6 @@ background-color: rgba(129, 195, 255, 0.2); /*bg-info*/
 .is-highlighted {
 	background-color: Yellow;
 }
+.var.is-parsed {
+	/*color: #777;*/
+}

@@ -175,7 +175,7 @@ var Adventure;
 					]
 				},{
 					"id": 7,
-					"pageText": "There is a winter chill in the air. You need to ride the ferry to get home. You find yourself at a crossroads. ",
+					"pageText": "There is a winter chill in the air. You need to ride the ferry to get home. With [[Gold]] Gold in your pocket, You find yourself at a crossroads. ",
 					"choices": [
 						{
 							"caption": "Approach the ferry",
@@ -280,7 +280,7 @@ var Adventure;
 					"pageText": "You head down a dirt path which leads into a grove of trees. A voice from a nearby bush calls out. <p>\"The man who invented it doesn't want it. The man who bought it doesn't need it. The man who needs it doesn't know it. What is it?\"</p>",
 					"choices": [
 						{
-							"caption": "A coffin (make text input here!)",
+							"caption": "coffin",
 							"nextPage": 11,
 							"isSecret": false,
 							"input" : true

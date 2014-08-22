@@ -5,6 +5,7 @@
 		init: function (element, valueAccessor, allBindingsAccessor, viewModel, bindingContext) {
 			var selectorForBoundContent = ko.utils.unwrapObservable(valueAccessor());
 			var popOverTemplate = "<div class='current-popover'></div>";
+			var vmod = bindingContext.$root;
 			$(element).popover({ 
 				content: popOverTemplate, 
 				html: true, 
@@ -22,10 +23,11 @@
 						$(this).popover('show');
 					}
 					var po = $('.popover.fade.in .current-popover'); //select the popover that is fading in. There are more thna one current-popover at a time due to transitions
-					po.html($(selectorForBoundContent).html());
+					ko.utils.setHtml(po,$(selectorForBoundContent).html());
 					
 					if(popoverOn) {
-						ko.applyBindings(viewModel, po[0]);
+						po = $('.popover.fade.in .current-popover');
+						ko.applyBindings(vmod, po[0]);
 						$('.tt').tooltip();
 					}
 				}

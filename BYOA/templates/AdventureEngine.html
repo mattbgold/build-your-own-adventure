@@ -114,7 +114,7 @@
             <div class="well pagecontent">
 				<div class="pagetext" data-bind="fadepage: stagePage">
                     <div id="dvHeightMatch">
-                        <p class="editable-block" data-bind="contentEditable: canEdit, html: currentPage().pageText"></p>
+                        <p class="editable-block" data-bind="contentEditable: canEdit, html: canEdit() ? currentPage().pageText : currentPage().parsedPageText"></p>
                         <ul class="pager choices">
 					<!-- ko foreach: currentPage().choices -->
 					<!-- ko if: $root.canEdit() || $data.input()===false -->
@@ -204,18 +204,28 @@
 				<fieldset>
 					<legend>Requirements</legend>
 				<!-- ko foreach: model.currentChoice().requirements -->
-						<p data-bind="text: variableName"></p> 
+						<div class="row">
+							<div class="col-xs-4" data-bind="text: $data.variableName">Variable</div>
+							<div class="col-xs-3" data-bind="text: $data.condition">Operator</div>
+							<div class="col-xs-4" data-bind="text: $data.value">Value</div>
+							<div class="col-md-1">Delete</div>
+						</div>
 				<!-- /ko -->
-					<div><a href="javascript:alert('Not Implemented')"><i class="fa fa-plus-square-o fa-fw"></i><span class="icontext">Add Requirement</span></a></div>
+					<div><a href="javascript:model.currentChoice().addRequirement()"><i class="fa fa-plus-square-o fa-fw"></i><span class="icontext">Add Requirement</span></a></div>
 				</fieldset>
 			</div>
 			<div class="col-sm-6">
 				<fieldset>
 					<legend>Commands</legend>
 				<!-- ko foreach: model.currentChoice().commands -->
-						<p data-bind="text: variableName"></p>
+						<div class="row">
+							<div class="col-md-3" data-bind="text: $data.variableName">Variable</div>
+							<div class="col-md-3" data-bind="text: $data.operation">Operator</div>
+							<div class="col-md-3" data-bind="text: $data.value">Value</div>
+							<div class="col-md-3">Delete</div>
+						</div>
 				<!-- /ko -->
-					<div><a href="javascript:alert('Not Implemented')"><i class="fa fa-plus-square-o fa-fw"></i><span class="icontext">Add Command</span></a></div>
+					<div><a href="javascript:model.currentChoice().addCommand()"><i class="fa fa-plus-square-o fa-fw"></i><span class="icontext">Add Command</span></a></div>
 				</fieldset>
 			</div>
 		</div>

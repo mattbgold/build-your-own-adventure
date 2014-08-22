@@ -20,7 +20,7 @@ var Adventure;
         self.pages = ko.observableArray([]);
 
 		$.each(story.pages, function(i, page) {
-			self.pages.push(new Adventure.Page(page));
+			self.pages.push(new Adventure.Page(page, self.variables));
 		});
 		$.each(story.labelGroups, function (i, labelGroup) {
 		    self.labelGroups.push(new Adventure.LabelGroup(labelGroup));
@@ -34,7 +34,7 @@ var Adventure;
 		
 		self.createNewPage = function(pageText) {
 			var newId = self.pages().length;
-		    var newPage = new Adventure.Page({id: newId, pageText: pageText});
+		    var newPage = new Adventure.Page({id: newId, pageText: pageText}, self.variables);
 			self.pages.push(newPage);
 			return newId;
 		};		
@@ -48,19 +48,31 @@ var Adventure;
 		};
     };
 
-    var Page = function (page) {
+    var Page = function (page, variables) {
         var self = this;
         self.id = ko.observable(page.id);
         self.name = ko.observable('Page ' + (page.id + 1));
 		self.pageText = ko.observable(page.pageText);
         self.choices = ko.observableArray([]);
-        
-        self.hasTextInput = ko.computed(function() {
+
+    	self.hasTextInput = ko.computed(function() {
     		return $.grep(self.choices(), function(choice) {
 				return choice.input();
     		}).length > 0; 
     	});
-    	
+		self.parsedPageText = ko.computed(function() {
+			return self.pageText().replace(/\[\[([^\]]+)\]\]/gi, function(match) {
+				//we have no knowledge of the variables here so this shouldnt be here but in EngineModel or Story
+				var variableName = match.replace('[[', '').replace(']]', '');
+				if(variables[variableName]) {
+					return '<span class="var is-parsed">'+variables[variableName]()+'</span>';
+				}
+				else {
+					return match;
+				}
+			});
+		});
+		
         if (page.choices && page.choices.length > 0) {
             $.each(page.choices, function (i, choice) {
                 self.choices.push(new Adventure.Choice(choice));
@@ -77,6 +89,13 @@ var Adventure;
 				return choice.caption() === caption 
 			});
 		}
+		
+		self.toJSON = function() {
+			var copy = ko.toJS(this);
+			delete copy.hasTextInput;
+			delete copy.parsedPageText;
+			return copy;
+		};
     };
 
     var Choice = function (choice) {
@@ -99,6 +118,13 @@ var Adventure;
 				self.requirements.push(new Adventure.Requirement(req));
 			});
 		}  
+		/*
+		self.addRequirement = function() {
+			self.requirements.push(new Adventure.Requirement({variableName: 'var1', condition: '=', value:'value'}));
+		};
+		self.addCommand = function() {
+			self.commands.push(new Adventure.Command({variableName: 'var1', operation: '=', value:'value'}));
+		};*/
     };
 
     var Command = function (command) {
